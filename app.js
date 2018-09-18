@@ -1,23 +1,18 @@
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import Debug from 'debug';
-import express from 'express';
-import logger from 'morgan';
-import path from 'path';
-import index from './routes/index';
-
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const Debug = require('debug');
+const express = require('express');
+const logger = require('morgan');
+const path = require('path');
 const cors = require("cors");
-
-
 const fileUpload = require('express-fileupload');
 
 
-import  MongoConnect  from './core/mongoconnect';
-
+const MongoConnect = require('./core/mongoconnect');
 new MongoConnect();
 // import favicon from 'serve-favicon';
 
-
+const index = require('./routes/index');
 const app = express();
 
 
@@ -90,4 +85,5 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-export default app;
+
+module.exports = app;
