@@ -1,9 +1,10 @@
+'use strict'
 
 import mongoose  from 'mongoose';
 
-import { GCPCDNProvider } from '../Providers/GCPCDNProvider'; 
+import { GCPCDNProvider } from '../../../Providers/GCPCDNProvider'; 
 import { UploadService } from '../Services/UploadService';
-import { ImageProvider } from  '../Providers/ImageProvider';
+import { ImageProvider } from  '../../../Providers/ImageProvider';
 
 
 export default class UploadController{
@@ -29,13 +30,8 @@ export default class UploadController{
                     error:'Attribute name should be content in form field'
                 })
             }
-            console.log({
-                    entity_id:_entityId,
-                    entity_tag: _entityTag,
-                    meta_prefix:_metaPrefix,
-                })
-
-
+           
+            
             let  _imageProvider  = ImageProvider.getBufferdImageFromRequest(req.files.content);
             
             let _fileName = (req.body.file_name)?req.body.file_name:_imageProvider.newFileName;

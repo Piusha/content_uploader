@@ -1,4 +1,6 @@
-import { Config } from '../../config/app';
+'use strict'
+
+import { Config } from '../../../../config/app';
 
 export class UploadDecorator{
 

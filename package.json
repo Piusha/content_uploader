@@ -4,7 +4,10 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./bin/start",
+    "start": "npm run build && nodemon ./dist/bin/start",
+    "es5":"nodemon ./bin/start",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "test": "mocha --recursive './test/*Test.js' --compilers js:babel-core/register"
   },
   "dependencies": {

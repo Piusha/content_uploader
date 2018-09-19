@@ -1,28 +1,30 @@
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const Debug = require('debug');
-const express = require('express');
-const logger = require('morgan');
-const path = require('path');
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import Debug from 'debug';
+import express from 'express';
+import logger from 'morgan';
+import path from 'path';
+import index from './routes/index';
+
 const cors = require("cors");
+
+
 const fileUpload = require('express-fileupload');
 
 
-const MongoConnect = require('./core/mongoconnect');
+import  MongoConnect  from './core/mongoconnect';
+
 new MongoConnect();
 // import favicon from 'serve-favicon';
 
-const index = require('./routes/index');
+
 const app = express();
 
+import Whitelist  from './config/whitelist';
 
-const  whitelist = [
-  "http://muldr.delenta.xyz",
-  "http://test_upload.delenta.xyz"
-];
 const  corsOptions = {
   origin: function(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (Whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -85,5 +87,4 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-
-module.exports = app;
+export default app;

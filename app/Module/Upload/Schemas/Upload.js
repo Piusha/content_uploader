@@ -1,3 +1,5 @@
+'use strict'
+
 import mongoose, { Schema } from 'mongoose';
 
 const collection_name = 'uploads';

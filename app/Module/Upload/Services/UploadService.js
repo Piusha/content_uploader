@@ -1,6 +1,5 @@
-
+'use strict'
 import { Upload } from '../Schemas/Upload';
-import { Config } from '../../config/app';
 import { UploadDecorator } from '../Decorators/UploadsDecorator';
 
 
