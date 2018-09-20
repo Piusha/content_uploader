@@ -19,20 +19,45 @@ export default class UploadController{
         try{
 
 
-            let _entityTag      = req.params.entity_tag;
-            let _entityId       = req.params.entity_id;
-            let _metaPrefix     = req.params.meta_prefix;
+            const _entityTag      = req.params.entity_tag;
+            const _entityId       = req.params.entity_id;
+            const _metaPrefix     = req.params.meta_prefix;
 
-
-            if(!req.files.content){
-                res.status(400).json({
-                    status:'error',
-                    error:'Attribute name should be content in form field'
-                })
-            }
-           
+            let _content          = null;
+            let _isBase64 = false;
             
-            let  _imageProvider  = ImageProvider.getBufferdImageFromRequest(req.files.content);
+
+
+            if(req.params.type == 'base64'){
+
+                if(!req.body.content || req.body.content == " "){
+
+                    return res.status(400).json({
+                        status:'error',
+                        error:'Attribute name should be content in form field and it cannot  be empty'
+                    })
+                }
+                _isBase64 = true;
+                _content = req.body.content;
+
+
+            } else if(req.params.type == 'file'){
+
+                if(!req.files.content ||  req.files.content == " "){
+
+                    return res.status(400).json({
+                        status:'error',
+                        error:'Attribute name should be content in form field and it cannot  be empty'
+                    })
+                }
+
+                _isBase64 = false;
+                _content = req.files.content;
+               
+            }
+
+
+            const _imageProvider = ImageProvider.getImageBuffer(_isBase64, _content);
             
             let _fileName = (req.body.file_name)?req.body.file_name:_imageProvider.newFileName;
 
@@ -51,11 +76,11 @@ export default class UploadController{
             })
 
 
-            res.status(200).json(t)                    
+            return res.status(200).json(t)                    
 
         }catch(ex){
             console.log(ex)
-            res.status(500).json(ex)
+            return res.status(500).json(ex)
         }
 
     }

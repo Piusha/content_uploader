@@ -2,16 +2,37 @@ import mimeTypes from 'mimetypes';
 import randomstring  from 'randomstring';
 
 export class ImageProvider {
-    
-    static getImageBuffer (base64Image){
 
-        let _mimeType = base64Image.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
+    /**
+     * Get Image as buffer
+     * @param {string} type 
+     * @param {*} content 
+     */
+    static getImageBuffer (isBase64, content){
 
-        let _base64EncodedImageString = base64Image.replace(/^data:image\/\w+;base64,/, '');
+        if(isBase64){
+
+            return ImageProvider.base64ToBuffer(content)
+        }else{
+
+            return ImageProvider.fileToBuffer(content)
+        }
+       
+    }
+
+    /**
+     * Convert Base64 image as buffer
+     * @param {*} base64Image 
+     */
+    static base64ToBuffer(base64Image){
+
+        const _mimeType = base64Image.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
+
+        const _base64EncodedImageString = base64Image.replace(/^data:image\/\w+;base64,/, '');
         
-        let _imageBuffer = new Buffer(_base64EncodedImageString, 'base64');
+        const _imageBuffer = new Buffer(_base64EncodedImageString, 'base64');
 
-        let _newFileName = randomstring.generate()+'.'+mimeTypes.detectExtension(_mimeType)
+        const _newFileName = randomstring.generate()+'.'+mimeTypes.detectExtension(_mimeType)
 
         return {
             mimeType:_mimeType,
@@ -19,14 +40,20 @@ export class ImageProvider {
             newFileName:_newFileName
         }
     }
+    
+   
 
-    static getBufferdImageFromRequest (content){
+    /**
+     * Convert File to Buffer
+     * @param {*} file 
+     */
+    static fileToBuffer (file){
 
-        let _mimeType = content.mimetype
+        const  _mimeType = file.mimetype
 
-        let _newFileName = randomstring.generate()+'.'+mimeTypes.detectExtension(_mimeType);
+        const  _newFileName = randomstring.generate()+'.'+mimeTypes.detectExtension(_mimeType);
 
-        let _imageBuffer = content.data;
+        const  _imageBuffer = file.data;
 
         return {
             mimeType:_mimeType,
