@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "npm run build && nodemon ./dist/bin/start",
-    "es5":"nodemon ./bin/start",
+    "es5": "nodemon ./bin/start",
     "clean": "rm -rf dist",
     "build": "npm run clean && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "test": "mocha --recursive './test/*Test.js' --compilers js:babel-core/register"
@@ -23,6 +23,7 @@
     "ejs": "^2.5.7",
     "express": "^4.15.4",
     "express-fileupload": "^0.4.0",
+    "jsonwebtoken": "^8.3.0",
     "mimetypes": "^0.1.1",
     "mongoose": "^5.2.15",
     "morgan": "^1.8.2",

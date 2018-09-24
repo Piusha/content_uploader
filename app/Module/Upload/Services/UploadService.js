@@ -43,7 +43,17 @@ export class UploadService {
 
 
 
-    }
+	}
+	update = async(query,data,options = null)=>{
+		try{
+
+			return await Upload.updateOne(query,data,options);
+		}catch(error){
+			console.log(error);
+			throw error;
+		}
+	}
+
 
 
 }

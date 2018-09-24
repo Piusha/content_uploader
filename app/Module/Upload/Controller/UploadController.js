@@ -67,16 +67,38 @@ export default class UploadController{
                         .upload({contentType: _imageProvider.mimeType})
            
 
-                        
-            let t = await this._upload.save({
-                entity_id:_entityId,
+			if(_metaPrefix == 'profile_image'){
+
+				await this._upload.update({
+					entity_id:_entityId
+				},{
+					entity_tag: _entityTag,
+					meta_prefix:_metaPrefix,
+					file_name:_fileName
+				},{upsert:true});
+				    
+			}else{
+				await this._upload.save({
+					entity_id:_entityId,
+					entity_tag: _entityTag,
+					meta_prefix:_metaPrefix,
+					file_name:_fileName
+				})
+			}
+
+			const options = {
+                
                 entity_tag: _entityTag,
                 meta_prefix:_metaPrefix,
-                file_name:_fileName
-            })
+                entity_id:_entityId
 
+            }    
+            
 
-            return res.status(200).json(t)                    
+			let _uploads = await this._upload.retrieve(options)
+
+            return res.status(200).json(_uploads)        
+                        
 
         }catch(ex){
             console.log(ex)
