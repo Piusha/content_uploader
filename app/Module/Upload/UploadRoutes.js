@@ -5,7 +5,7 @@ import { AuthMiddleware } from '../../Middleware/AuthMiddleware';
 const router = express.Router();
 
 
-router.post('/media/:type/:entity_tag/:entity_id/:meta_prefix',AuthMiddleware.authValidation,UploadCntrl.upload);
+router.post('/media/:type/:entity_tag/:entity_id/:meta_prefix',UploadCntrl.upload);
 
 router.get('/media/:entity_tag/:meta_prefix/:id?',UploadCntrl.retrieve);
 
