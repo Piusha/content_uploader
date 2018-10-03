@@ -35,7 +35,10 @@ export class UploadDecorator{
         ].join('/')
 
         return {
-            uploadId:result._id,
+			
+			upload_id:result._id,
+			entity_id:result.entity_id,
+			meta_prefix:result.meta_prefix,
             public_url:_endpoint
         }
     }
