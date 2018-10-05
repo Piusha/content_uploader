@@ -14,9 +14,10 @@ export class UploadDecorator{
     getAsArray(){
 
         let _decoratedUploads = this.resultSet.map( (result)=>{
-          
-            return this.getAsObject(result);
-
+		  
+			const out = {};
+			out[result._id] = this.getAsObject(result);
+            return out;
         })
 
         return _decoratedUploads;
