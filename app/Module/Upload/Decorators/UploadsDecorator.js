@@ -12,15 +12,20 @@ export class UploadDecorator{
     }
 
     getAsArray(){
+		const out = {};
+        this.resultSet.forEach(result => {
+			
+			
+				if(!out.hasOwnProperty(result.entity_id )){
+					
+					out[result.entity_id]=[];
+				}
+				
+				out[result.entity_id].push(this.getAsObject(result));
+				
+		});
 
-        let _decoratedUploads = this.resultSet.map( (result)=>{
-		  
-			const out = {};
-			out[result._id] = this.getAsObject(result);
-            return out;
-        })
-
-        return _decoratedUploads;
+        return out;
     }
 
     getAsObject(result){
