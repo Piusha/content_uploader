@@ -82,7 +82,7 @@ export class GCPCDNProvider{
 
     }
     
-    upload = async (options = {}) =>{
+    upload = async (options = {}) => {
        
         return await this.getGCPFilePath().save(this.uploadFileName, {
             metadata: options,

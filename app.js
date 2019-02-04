@@ -34,6 +34,8 @@ const  corsOptions = {
 app.use(cors()); // include before other routes
 app.options("*", cors(corsOptions)); // include before other routes
 
+app.use(express.json({limit: '100mb'}));
+app.use(express.urlencoded({limit: '100mb'}));
 
 
 const debug = Debug('medea-uploader:app');

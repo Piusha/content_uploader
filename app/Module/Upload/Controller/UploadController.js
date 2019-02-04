@@ -63,9 +63,9 @@ export default class UploadController{
 
             this._gcpcdn.setUploadFileName(_imageProvider.imageBuffer)
                         .setMetaData(_entityTag,_entityId,_metaPrefix)
-                        .setFileName(_fileName)
-                        .upload({contentType: _imageProvider.mimeType})
-           
+                        .setFileName(_fileName);
+			
+			await this._gcpcdn.upload({contentType: _imageProvider.mimeType})
 
 			if(_metaPrefix == 'profile_image'){
 
@@ -97,6 +97,7 @@ export default class UploadController{
 
 			let _uploads = await this._upload.retrieve(options)
 
+			
             return res.status(200).json(_uploads)        
                         
 
@@ -120,9 +121,10 @@ export default class UploadController{
                 })
             }
 
-            let _entityIds = req.query.entity_ids.split(',')
+            const _entityIds = req.query.entity_ids.split(',')
 
-            let options = {
+
+            const options = {
                 
                 entity_tag: req.params.entity_tag,
                 meta_prefix:req.params.meta_prefix,
@@ -134,7 +136,7 @@ export default class UploadController{
             if(req.params.id){
                 options._id = mongoose.Types.ObjectId(req.params.id)
             }
-            let _uploads = await this._upload.retrieve(options)
+            const _uploads = await this._upload.retrieve(options)
 
             return res.status(200).json(_uploads)        
 
