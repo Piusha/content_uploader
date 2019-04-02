@@ -14,7 +14,7 @@ const CDN_END_POINT = {
 	'QA': 'https://storage.googleapis.com',
 	'PROD': '',
 }
-const APP_ENV = (process.env.NODE_ENV) || 'DEV';
+const APP_ENV = (process.env.NODE_ENV) || 'QA';
 
 console.log("APP RUNING IN :", process.env.PORT)
 
