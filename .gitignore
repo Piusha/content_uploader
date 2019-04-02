@@ -1,5 +1,4 @@
 node_modules
 yarn-error.log
-config/app.js
 dist
 config/whitelist.js
