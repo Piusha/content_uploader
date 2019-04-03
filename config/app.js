@@ -4,8 +4,8 @@
 * Data base connection string 
 */
 const DB_CONNECTION_STRING = {
-	'DEV': 'mongodb://delenta_enigma:xyz123@enigma.db.delenta.com:27017/delenta_dev',
-	'QA': 'mongodb://delenta_enigma:xyz123@enigma.db.delenta.com:27017/delenta_dev',
+	'DEV': '', //DEC DB
+	'QA': '', // QA DB
 	'PROD': '',
 };
 
