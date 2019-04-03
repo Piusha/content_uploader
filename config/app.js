@@ -26,8 +26,8 @@ export const Config = {
 	APP_NAME: 'Media Uploader',
 
 
-	PROJECT_ID: 'delenta-1532372869718',
-	APP_KEY_LOCATION: '/delenta/devops/Delenta-535b4c729172.json',
+	PROJECT_ID: '',
+	APP_KEY_LOCATION: '',
 	BUCKET_NAME: 'del_contents',
 
 	DB_CONNECTION_STRING: DB_CONNECTION_STRING[APP_ENV],
